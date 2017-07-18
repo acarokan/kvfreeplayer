@@ -12,3 +12,5 @@ kontroller:
 6.)sol ok tuşu --> 5sn geri sar
 
 bağımlılıklar: kivy,python3-pysrt
+
+python3 video.py şeklinde çalıştırılır
