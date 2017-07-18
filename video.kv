@@ -1,0 +1,101 @@
+#
+#
+#  Copyright 2017 OKAN ACAR <acarokan55@gmail.com>
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 3 of the License, or
+#  (at your option) any later version.
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#  GNU General Public License for more details.
+#
+#  You should have received a copy of the GNU General Public License
+#  along with this program; if not, write to the Free Software
+#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+#  MA 02110-1301, USA.
+#
+#
+<video_alan>:
+	video: _video
+	ilerleme: _ilerleme
+	altyazi: _altyazi
+	giris: _giris
+	durumcubugu: _durumcubugu
+	size_hint: 1,0.9
+	
+	
+	
+	Video:
+		id: _video
+		allow_stretch: True
+		pos_hint: {"x":0,"y":0.1}
+		play: True
+		state: "play"
+		
+	AsyncImage:
+		id: _giris
+		pos_hint: {"center_x":0.5,"y":0.1}
+		source: "giris.png"
+	
+	Label:
+	
+		id: _altyazi
+		markup: True
+		pos:0,-200
+		font_size: 30
+		text: u""
+			
+		
+	
+
+	BoxLayout:
+		
+		id: _durumcubugu
+		
+		pos_hint: {"x":0,"y":0}
+		
+		orientation: "horizontal"
+		
+		size_hint: 1,0.1
+		
+		Button:
+
+			size: 33,33
+			size_hint: None,None
+			pos_hint: {"center_x":0.5,"center_y":0.5}
+			background_normal: "ply_nrm.png"
+			background_down: "ply_down.png"
+			
+		
+			on_release: root.oynat()
+			
+		Button:
+			
+			size: 33,33
+			size_hint: None,None
+			pos_hint: {"center_x":0.5,"center_y":0.5}
+			background_normal: "ps_nrml.png"
+			background_down: "ps_down.png"
+			
+			on_release: root.duraklat()
+		
+		Button:
+			size: 33,33
+			size_hint: None,None
+			pos_hint: {"center_x":0.5,"center_y":0.5}
+			background_normal: "stp_nrml.png"
+			background_down: "stp_down.png"
+			
+			on_release: root.durdur()
+		
+		Slider:
+			id: _ilerleme
+			min:0
+			max:1
+			value:0
+			pos_hint: {"center_x":0.5,"center_y":0.5}
+
+
