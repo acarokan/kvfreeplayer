@@ -8,5 +8,7 @@ kontroller:
 2.)enter --> tam ekran aç kapa
 3.)boşluk --> duraklat oynat
 4.)fare scroll --> ses ayarı
+5.)sağ ok tuşu --> 5sn ileri sar
+6.)sol ok tuşu --> 5sn geri sar
 
 bağımlılıklar: kivy,python3-pysrt
