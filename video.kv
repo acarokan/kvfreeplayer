@@ -18,84 +18,191 @@
 #  MA 02110-1301, USA.
 #
 #
-<video_alan>:
+<VideoAlan>:
+
 	video: _video
 	ilerleme: _ilerleme
 	altyazi: _altyazi
-	giris: _giris
 	durumcubugu: _durumcubugu
-	size_hint: 1,0.9
-	
-	
-	
-	Video:
-		id: _video
-		allow_stretch: True
-		pos_hint: {"x":0,"y":0.1}
-		play: True
-		state: "play"
-		
-	AsyncImage:
-		id: _giris
-		pos_hint: {"center_x":0.5,"y":0.1}
-		source: "giris.png"
-	
-	Label:
-	
-		id: _altyazi
-		markup: True
-		pos:0,-200
-		font_size: 30
-		text: u""
-			
-		
-	
+	menu: _menu
 
+	RelativeLayout:
+
+		size_hint: 1,1
+
+		Video:
+
+			size_hint: 0,0
+			id: _video
+			allow_stretch: True
+			play: True
+			state: "play"
+
+
+		Label:
+
+			id: _altyazi
+			markup: True
+			size_hint: 1,0.3
+			pos:0,56
+			font_size: 40
+			text: u""
+
+
+
+		BoxLayout:
+
+			id: _durumcubugu
+
+			pos_hint: {"center_x":0.5,"y":0}
+
+			orientation: "horizontal"
+
+			padding: 3,3
+			size_hint: 0.9,None
+			height: 56
+
+			canvas.before:
+				Color:
+					rgba: 0.6,0.6,0.6,0.9
+				Rectangle:
+					pos: self.pos
+					size: self.size
+
+
+			Button:
+
+				size: 48,48
+				size_hint: None,None
+				pos_hint: {"center_x":0.5,"center_y":0.5}
+				background_normal: "play-icon.png"
+				background_down: "play-icon_dwn.png"
+
+
+				on_release: root.oynat()
+
+			Button:
+
+				size: 48,48
+				size_hint: None,None
+				pos_hint: {"center_x":0.5,"center_y":0.5}
+				background_normal: "pause-icon.png"
+				background_down: "pause-icon_dwn.png"
+
+				on_release: root.duraklat()
+
+			Button:
+				size: 48,48
+				size_hint: None,None
+				pos_hint: {"center_x":0.5,"center_y":0.5}
+				background_normal: "stop-icon.png"
+				background_down: "stop-icon_dwn.png"
+
+				on_release: root.durdur()
+
+			Slider:
+				id: _ilerleme
+				min:0
+				max:1
+				value:0
+				pos_hint: {"center_x":0.5,"center_y":0.5}
+				cursor_size: 0,0
+				value_track: True
+				value_track_color: [0.215686275,0.6902,0.247058824,1]
+
+		BoxLayout:
+
+			id: _menu
+			orientation: "horizontal"
+			pos_hint: {"x":0,"top":1}
+			size_hint: 1,None
+			padding: 5
+			spacing: 5
+			height: 50
+
+			canvas.before:
+
+				Color:
+					rgba: 0,0,0,0.5
+				Rectangle:
+					pos: self.pos
+					size: self.size
+
+			Button:
+
+				text: "VIDEO"
+				size_hint: None,1
+				width: 60
+				on_press:
+	                root.manager.transition.direction = 'right'
+	                root.manager.current = 'main'
+
+			Button:
+
+				text: "OPEN"
+				size_hint: None,1
+				width: 60
+				on_press:
+	                root.manager.transition.direction = 'left'
+	                root.manager.current = 'files'
+
+<OpenFolder>:
+
+	menu: _menu
 	BoxLayout:
-		
-		id: _durumcubugu
-		
-		pos_hint: {"x":0,"y":0}
-		
-		orientation: "horizontal"
-		
-		size_hint: 1,0.1
-		
-		Button:
 
-			size: 33,33
-			size_hint: None,None
-			pos_hint: {"center_x":0.5,"center_y":0.5}
-			background_normal: "ply_nrm.png"
-			background_down: "ply_down.png"
-			
-		
-			on_release: root.oynat()
-			
-		Button:
-			
-			size: 33,33
-			size_hint: None,None
-			pos_hint: {"center_x":0.5,"center_y":0.5}
-			background_normal: "ps_nrml.png"
-			background_down: "ps_down.png"
-			
-			on_release: root.duraklat()
-		
-		Button:
-			size: 33,33
-			size_hint: None,None
-			pos_hint: {"center_x":0.5,"center_y":0.5}
-			background_normal: "stp_nrml.png"
-			background_down: "stp_down.png"
-			
-			on_release: root.durdur()
-		
-		Slider:
-			id: _ilerleme
-			min:0
-			max:1
-			value:0
-			pos_hint: {"center_x":0.5,"center_y":0.5}
+		orientation: "vertical"
+
+		BoxLayout:
+
+			id: _menu
+
+			orientation: "horizontal"
+			pos_hint: {"x":0,"top":1}
+			size_hint: 1,None
+			padding: 5
+			spacing: 5
+			height: 50
+
+			canvas.before:
+
+				Color:
+					rgba: 0,0,0,0.5
+				Rectangle:
+					pos: self.pos
+					size: self.size
+
+			Button:
+
+				text: "VIDEO"
+				size_hint: None,1
+				width: 60
+				on_press:
+	                root.manager.transition.direction = 'right'
+	                root.manager.current = 'main'
+
+			Button:
+
+				text: "OPEN"
+				size_hint: None,1
+				width: 60
+				on_press:
+	                root.manager.transition.direction = 'left'
+	                root.manager.current = 'files'
 
 
+		BoxLayout:
+
+			orientation: "vertical"
+
+			FileChooserIconView:
+				id: filechooser
+				size_hint: 1,0.9
+
+			Button:
+
+				size_hint: None,0.1
+				pos_hint: {"x":0,"right":1}
+				width: 60
+	            text: "SEÇ"
+	            on_release: root.parent.get_screen("main").calistir(filechooser.path,filechooser.selection)
