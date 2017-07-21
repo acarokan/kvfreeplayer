@@ -31,6 +31,7 @@ from kivy.properties import BooleanProperty,ObjectProperty
 from kivy.uix.label import Label
 from kivy.modules import inspector
 from kivy.config import Config
+from kivy.clock import Clock
 
 import pysrt
 
@@ -55,6 +56,8 @@ class VideoAlan(Screen):
 		self.keyboard.bind(on_key_down = self.on_keyboard_down)
 
 		self.keyboard.bind(on_key_up = self.on_keyboard_up)
+
+		self.ses_ayari.value = self.video.volume
 
 	def keyboard_closed(self):
 
@@ -226,22 +229,49 @@ class VideoAlan(Screen):
 		if "button" in touch.profile:
 
 
+			if touch.button == "scrolldown" and self.durumcubugu.collide_point(*touch.pos) == False and self.ses.pos_hint != {"right":0.9,"top":0.9}:
+
+				self.ses.pos_hint = {"right":0.9,"top":0.9}
+
+				Clock.schedule_once(self.ses_gizle, 5)
+
+			if touch.button == "scrollup" and self.durumcubugu.collide_point(*touch.pos) == False and self.ses.pos_hint != {"right":0.9,"top":0.9}:
+
+				self.ses.pos_hint = {"right":0.9,"top":0.9}
+
+				Clock.schedule_once(self.ses_gizle, 5)
+
 			if touch.button == "scrolldown":
 
 				self.video.volume += 0.05
+
+				if self.durumcubugu.collide_point(*touch.pos) == False:
+
+					self.ses_ayari.value += 0.05
 
 				if self.video.volume > 2:
 
 					self.video.volume = 2
 
+				if self.ses_ayari.value > 2:
+
+					self.ses_ayari.value = 2
+
 			if touch.button == "scrollup":
 
 				self.video.volume -= 0.05
+
+				if self.durumcubugu.collide_point(*touch.pos) == False:
+
+					self.ses_ayari.value -= 0.05
 
 				if self.video.volume < 0:
 
 					self.video.volume = 0
 
+				if self.ses_ayari.value < 0:
+
+					self.ses_ayari.value = 0
 
 
 			if self.video.collide_point(*touch.pos):
@@ -290,10 +320,17 @@ class VideoAlan(Screen):
 
 				self.video.bind(position = self.slider)
 
+
+			self.video.volume = self.ses_ayari.value
+
 			super(VideoAlan,self).on_touch_up(touch)
 
 		else:
 			pass
+
+	def ses_gizle(self,dt):
+
+		self.ses.pos_hint = {"left":2,"top":2}
 
 class OpenFolder(Screen):
 	pass

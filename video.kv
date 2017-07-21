@@ -25,6 +25,8 @@
 	altyazi: _altyazi
 	durumcubugu: _durumcubugu
 	menu: _menu
+	ses: _ses
+	ses_ayari: _ses_ayari
 
 	RelativeLayout:
 
@@ -47,6 +49,32 @@
 			pos:0,56
 			font_size: 40
 			text: u""
+
+		BoxLayout:
+
+			id: _ses
+			size_hint:None,None
+			size: 30,150
+			pos_hint: {"left":2,"top":2}
+
+			canvas.before:
+				Color:
+					rgba: 0.6,0.6,0.6,0.9
+				Rectangle:
+					pos: self.pos
+					size: self.size
+
+			Slider:
+
+				id: _ses_ayari
+				orientation: "vertical"
+				min:0
+				max:2
+				width: 10
+				value:0
+				cursor_size: 0,0
+				value_track: True
+				value_track_color: [0,0.6,0,1]
 
 
 
@@ -108,7 +136,9 @@
 				pos_hint: {"center_x":0.5,"center_y":0.5}
 				cursor_size: 0,0
 				value_track: True
-				value_track_color: [0.215686275,0.6902,0.247058824,1]
+				value_track_color: [0,0.6,0,1]
+
+
 
 		BoxLayout:
 
